@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <title>Nigeria Exchange Rate Analytics</title>
+    <link
+      rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Montserrat|Roboto&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.11.2/css/all.css"
+      integrity="sha384-KA6wR/X5RY4zFAHpv/CnoG2UW1uogYfdnP67Uv7eULvTveboZJg0qUpmJZb5VqzN"
+      crossorigin="anonymous"
+    />
+    <link
+      href="https://fonts.googleapis.com/css?family=Open+Sans|Source+Sans+Pro&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static',filename='style.css') }}"
+    />
+    <link rel="stylesheet" href="../static/style.css" />
+  </head>
+  <body>
+    <nav
+      id="navbar-overrides"
+      class="navbar fixed-top navbar-expand-lg navbar-light bg-light"
+    >
+      <div class="container">
+        <a class="navbar-brand" href="#">APIs by Stephen Sanwo</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-toggle="collapse"
+          data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://documenter.getpostman.com/view/7844749/SzKPW2AY"
+                target="_blank"
+                >API Documentation<span class="sr-only">(current)</span></a
+              >
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#" target="_blank">Github</a>
+            </li>
+            <li class="nav-item">
+              <a
+                class="nav-link"
+                href="https://www.kaggle.com/stephensanwo/predicting-exchange-rate-movements-with-prophet"
+                target="_blank"
+                >Notebooks</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="jumbotron-overrides" class="jumbotron paral paralsec1 rounded-0">
+      <div class="container showcase">
+        <div class="row">
+          <div class="col-12 col-sm-12">
+            <h1>
+              Exchange Rate API
+            </h1>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-12 col-sm-9">
+            <h6>
+              A Rest API, that provides both historical daily rates, as well as
+              predicted exchange rate movement powered by time series
+              forecasting models.
+            </h6>
+          </div>
+        </div>
+        <div class="row contact hide-sm">
+          <div class="col-12 col-sm-6">
+            <small>Developed by Stephen Sanwo</small>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container content">
+      <h4>About the Project</h4>
+      <hr />
+      <p>
+        Exchange rate API is an experimental API created to provide historical
+        and predicted exchange rate data for the Naira (NGN) against three
+        currencies, USD, EUR and GBP. <br />
+
+        The API architecture is best explained with the illustration below. In
+        summary, historical data is scraped from BDC websites which release only
+        about a week old live data on their websites, and do not provide an open
+        source API for third parties to access the historical rates for
+        analysis.
+        <br />
+        The data is stored in a mongodb cloud atlas storage, and forms the core
+        json data for the historical rates requests via the API routes.The data
+        is then used to make a 30 day rate forecast, leveraging Facebook's open
+        sourced forecasting model.The forecast result is available via a get
+        request.
+      </p>
+      <img class="flowchart" src="../static/Flowchart.svg" width="80%" />
+      <h4>The API</h4>
+      <hr />
+      <p>
+        Powered by live exchange rate data sources such, the API is capable of
+        delivering daily exchange rate data for three major currencies. The API
+        also provides predicted exchange rate movements 30 days forward, powered
+        by Facebook Prophet's forecasting model. <br />
+        The API comes with multiple endpoints, each serving a different use
+        case. Endpoint functionalities include getting the latest and historical
+        exchange rate data for all or a specific set of currencies,retrieving
+        prediction results from prophet.
+        <a
+          href="https://documenter.getpostman.com/view/7844749/SzKPW2AY"
+          target="_blank"
+          >Read the full API Documentation
+          <i class="fas fa-chevron-circle-right"></i
+        ></a>
+      </p>
+      <h6 style="margin-top: 2rem;">
+        API Request Examples
+      </h6>
+      <p>
+        A sample GET request to the API endpoints for historical and forecast
+        data using cURL
+      </p>
+      <div>
+        <!-- HTML generated using hilite.me -->
+        <div
+          class="code"
+          style="background: #f8f8f8; overflow:auto;width:auto;border:"
+        >
+          <pre
+            style="margin: 0; line-height: 125%"
+          ><span style="color: #408080; font-style: italic">#Forecast Rates:</span>
+curl <span style="color: #666666">--</span>location <span style="color: #666666">--</span>request GET <span style="color: #BA2121">&#39;https://exchange-rate-api0789.herokuapp.com/cbn_30days_pred&#39;</span>
+
+<span style="color: #408080; font-style: italic">#USD BDC Rates</span>
+curl <span style="color: #666666">--</span>location <span style="color: #666666">--</span>request GET <span style="color: #BA2121">&#39;https://exchange-rate-api0789.herokuapp.com/all_usd_bdc_rates&#39;</span>
+
+<span style="color: #408080; font-style: italic">#GBP BDC Rates</span>
+curl <span style="color: #666666">--</span>location <span style="color: #666666">--</span>request GET <span style="color: #BA2121">&#39;https://exchange-rate-api0789.herokuapp.com/all_gbp_bdc_rates&#39;</span>
+
+<span style="color: #408080; font-style: italic">#EUR BDC Rates</span>
+curl <span style="color: #666666">--</span>location <span style="color: #666666">--</span>request GET <span style="color: #BA2121">&#39;https://exchange-rate-api0789.herokuapp.com/all_eur_bdc_rates&#39;</span>
+
+<span style="color: #408080; font-style: italic">#CBN Rates</span>
+curl <span style="color: #666666">--</span>location <span style="color: #666666">--</span>request GET <span style="color: #BA2121">&#39;https://exchange-rate-api0789.herokuapp.com/cbn_rates&#39;</span>
+</pre>
+        </div>
+      </div>
+      <p>
+        A sample GET request to the API endpoints for historical and forecast
+        data using python
+      </p>
+      <div>
+        <!-- HTML generated using hilite.me -->
+        <div
+          class="code"
+          style="background: #f8f8f8; overflow:auto;width:auto;border:"
+        >
+          <pre
+            style="margin: 0; line-height: 125%"
+          ><span style="color: #008000; font-weight: bold">import</span> <span style="color: #008080; font-weight: bold">requests</span>
+
+url <span style="color: #666666">=</span> <span style="color: #BA2121">&quot;https://exchange-rate-api0789.herokuapp.com/cbn_30days_pred&quot;</span>
+
+payload <span style="color: #666666">=</span> {}
+headers<span style="color: #666666">=</span> {}
+
+response <span style="color: #666666">=</span> requests<span style="color: #666666">.</span>request(<span style="color: #BA2121">&quot;GET&quot;</span>, url, headers<span style="color: #666666">=</span>headers, data <span style="color: #666666">=</span> payload)
+
+<span style="color: #008000; font-weight: bold">print</span>(response<span style="color: #666666">.</span>text<span style="color: #666666">.</span>encode(<span style="color: #BA2121">&#39;utf8&#39;</span>))
+</pre>
+        </div>
+      </div>
+      <h4 style="margin-top: 1rem;">Predictive Models</h4>
+      <hr />
+      <h6 style="margin-top: 2rem;">
+        Automatic Forecasting Procedure with Facebook Prophet
+      </h6>
+      <p>
+        Prophet is a procedure for forecasting time series data based on an
+        additive model where non-linear trends are fit with yearly, weekly, and
+        daily seasonality. For our use case, facebook prophet provides easier to
+        create a baseline forecasts of exchange rate data, when compared with
+        other available options such as Autoregressive Integrated Moving Average
+        (ARIMA) discussed below.
+      </p>
+      <a href="https://github.com/facebook/prophet" target="_blank"
+        >Refer to the Prophet Documentation
+        <i class="fas fa-chevron-circle-right"></i
+      ></a>
+      <p>
+        A dynamic prophet model was deployed with IBM watson studio to regularly
+        retrain the data and obtain 30 days forward predictions at intervals.
+        Immediate forecasts for the next 30 day period are displayed below:
+      </p>
+      <div class="row">
+        {% for id in ids %}
+        <div class="col-12 col-sm-3" id="{{id}}"></div>
+        {% endfor %}
+      </div>
+      <p>
+        An example Get request can be called to get the predicted rates as shown
+        below using python. You access the kernel on kaggle
+        <a
+          href="https://www.kaggle.com/stephensanwo/predicting-exchange-rate-movements-with-prophet"
+          target="_blank"
+          >via this link <i class="fas fa-chevron-circle-right"></i
+        ></a>
+      </p>
+      <h6 style="margin-top: 2rem;">
+        Autoregressive Integrated Moving Average
+      </h6>
+      <p>
+        ARIMA modeling, in theory, is the most general class of models for
+        forecasting a time series. The ARIMA experiment modeled the trends in
+        the exchange rate data over time, and ran the forecast on a test data
+        and outputs predicted rates with a mean squared error of 0.000039. The
+        prediction is however not continuous and results of the prediction is
+        not available via a get request. You access the kernel on kaggle
+        <a
+          href="https://www.kaggle.com/stephensanwo/predicting-exchange-rate-movement-with-arima"
+          target="_blank"
+          >via this link <i class="fas fa-chevron-circle-right"></i
+        ></a>
+      </p>
+
+      <h4 style="margin-top: 1rem;">Historical Rates</h4>
+      <hr />
+      <p>
+        One of the key aims of the project was to have a repository of
+        historical BDC rates, and public routes that can be used to access this
+        data for analytical purposes. get request routes are available for each
+        data source, and also a route that links all data sources together. A
+        sample request is shown below using python
+      </p>
+      <p>
+        Historical rates for the key datas sources are also presented below for
+        the most recent data.
+      </p>
+      <div class="container">
+        <div class="accordion" id="accordionExample">
+          <div id="card-override" class="card">
+            <div class="card-header" id="headingOne">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseOne"
+                  aria-expanded="true"
+                  aria-controls="collapseOne"
+                >
+                  <h6>Central bank Rates</h6>
+                </button>
+              </h2>
+              <hr />
+            </div>
+
+            <div
+              id="collapseOne"
+              class="collapse show"
+              aria-labelledby="headingOne"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life
+                  accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                  non cupidatat skateboard dolor brunch. Food truck quinoa
+                  nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                  aliqua put a bird on it squid single-origin coffee nulla
+                  assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+                  beer labore wes anderson cred nesciunt sapiente ea proident.
+                  Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                  beer farm-to-table, raw denim aesthetic synth nesciunt you
+                  probably haven't heard of them accusamus labore sustainable
+                  VHS.
+                </p>
+                <div id="table-style" class="container">
+                  <div class="row">
+                    <div class="col-12 table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 22%">Date</th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Sell
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for cbn_rates in cbn_rates%}
+                          <tr>
+                            <td scope="row">{{cbn_rates.Date}}</td>
+                            <td>{{cbn_rates.USD_Buy}}</td>
+                            <td>{{cbn_rates.USD_Sell}}</td>
+                            <td>{{cbn_rates.GBP_Buy}}</td>
+                            <td>{{cbn_rates.GBP_Sell}}</td>
+                            <td>{{cbn_rates.EUR_Buy}}</td>
+                            <td>{{cbn_rates.EUR_Sell}}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="card-override" class="card">
+            <div class="card-header" id="headingTwo">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  <h6>Aboki FX Rates</h6>
+                </button>
+              </h2>
+              <hr />
+            </div>
+            <div
+              id="collapseTwo"
+              class="collapse"
+              aria-labelledby="headingTwo"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life
+                  accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                  non cupidatat skateboard dolor brunch. Food truck quinoa
+                  nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                  aliqua put a bird on it squid single-origin coffee nulla
+                  assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+                  beer labore wes anderson cred nesciunt sapiente ea proident.
+                  Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                  beer farm-to-table, raw denim aesthetic synth nesciunt you
+                  probably haven't heard of them accusamus labore sustainable
+                  VHS.
+                </p>
+                <div id="table-style" class="container">
+                  <div class="row">
+                    <div class="col-12 table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 22%">Date</th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Sell
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for abokifx_rates in abokifx_rates%}
+                          <tr>
+                            <td scope="row">{{abokifx_rates.Date}}</td>
+                            <td>{{abokifx_rates.USD_Buy}}</td>
+                            <td>{{abokifx_rates.USD_Sell}}</td>
+                            <td>{{abokifx_rates.GBP_Buy}}</td>
+                            <td>{{abokifx_rates.GBP_Sell}}</td>
+                            <td>{{abokifx_rates.EUR_Buy}}</td>
+                            <td>{{abokifx_rates.EUR_Sell}}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="card-override" class="card">
+            <div class="card-header" id="headingThree">
+              <h2 class="mb-0">
+                <button
+                  class="btn btn-link collapsed"
+                  type="button"
+                  data-toggle="collapse"
+                  data-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  <h6>FX Mallam Rates</h6>
+                </button>
+              </h2>
+              <hr />
+            </div>
+            <div
+              id="collapseThree"
+              class="collapse"
+              aria-labelledby="headingThree"
+              data-parent="#accordionExample"
+            >
+              <div class="card-body">
+                <p>
+                  Anim pariatur cliche reprehenderit, enim eiusmod high life
+                  accusamus terry richardson ad squid. 3 wolf moon officia aute,
+                  non cupidatat skateboard dolor brunch. Food truck quinoa
+                  nesciunt laborum eiusmod. Brunch 3 wolf moon tempor, sunt
+                  aliqua put a bird on it squid single-origin coffee nulla
+                  assumenda shoreditch et. Nihil anim keffiyeh helvetica, craft
+                  beer labore wes anderson cred nesciunt sapiente ea proident.
+                  Ad vegan excepteur butcher vice lomo. Leggings occaecat craft
+                  beer farm-to-table, raw denim aesthetic synth nesciunt you
+                  probably haven't heard of them accusamus labore sustainable
+                  VHS.
+                </p>
+                <div id="table-style" class="container">
+                  <div class="row">
+                    <div class="col-12 table-responsive">
+                      <table class="table table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col" style="width: 22%">Date</th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-dollar-sign"></i> USD Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-pound-sign"></i> GBP Sell
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Buy
+                            </th>
+                            <th scope="col" style="width: 13%">
+                              <i class="fas fa-euro-sign"></i> EUR Sell
+                            </th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          {% for fxmallam_rates in fxmallam_rates %}
+                          <tr>
+                            <td scope="row">{{fxmallam_rates.Date}}</td>
+                            <td>{{fxmallam_rates.USD_Buy}}</td>
+                            <td>{{fxmallam_rates.USD_Sell}}</td>
+                            <td>{{fxmallam_rates.GBP_Buy}}</td>
+                            <td>{{fxmallam_rates.GBP_Sell}}</td>
+                            <td>{{fxmallam_rates.EUR_Buy}}</td>
+                            <td>{{fxmallam_rates.EUR_Sell}}</td>
+                          </tr>
+                          {% endfor %}
+                        </tbody>
+                      </table>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </body>
+  <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script
+    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"
+  ></script>
+  <script
+    src="{{ url_for('static',filename='main.js') }}"
+    type="text/javascript"
+  ></script>
+  <script
+    src="{{ url_for('static',filename='plot.js') }}"
+    type="text/javascript"
+  ></script>
+  <!-- D3.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js"></script>
+  <!-- jQuery -->
+  <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+  <!-- Plotly.js -->
+  <script src="https://d14fo0winaifog.cloudfront.net/plotly-basic.js"></script>
+
+  <script type="text/javascript">
+      var graphs = {{graphJSON | safe}};
+      var ids = {{ids | safe}};
+
+      for(var i in graphs) {
+          Plotly.plot(ids[i], // the ID of the div, created above
+                    graphs[i].data,
+                    graphs[i].layout || {});
+    }
+  </script>
+</html>

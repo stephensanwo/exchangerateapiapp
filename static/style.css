@@ -1,0 +1,318 @@
+/*General*/
+
+/*Navbar*/
+
+.navbar-toggler {
+  border: none;
+  outline: 0;
+}
+
+.navbar-toggler:focus {
+  border-style: none;
+  outline: 0;
+  border: red;
+}
+
+#navbar-overrides .navbar-brand {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1.2rem;
+  margin-right: 5rem;
+}
+
+#navbar-overrides .nav-link {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1rem;
+}
+
+/* Jumbotron */
+
+.jumbotron {
+  margin-top: 3rem;
+  background-color: #000000;
+  height: 40vh;
+  background: url("./jumbotron.jpg") no-repeat center center/cover;
+  position: relative;
+  z-index: 1;
+}
+
+.jumbotron::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  background: rgba(0, 0, 0, 0.7);
+}
+
+#jumbotron-overrides h1 {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 6rem;
+  color: #ffffff;
+  z-index: 5;
+}
+
+#jumbotron-overrides h6 {
+  color: #17a589;
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  padding-top: 1rem;
+  z-index: 2;
+}
+
+#jumbotron-overrides small {
+  color: beige;
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 200;
+}
+
+#jumbotron-overrides .showcase {
+  margin-top: 2rem;
+}
+
+#jumbotron-overrides .contact {
+  margin-top: 1rem;
+}
+
+#jumbotron-overrides .fab {
+  color: #ffffff;
+}
+
+/* Content */
+
+.content h4 {
+  color: #000000;
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 1.2rem;
+  padding-top: 1rem;
+}
+
+.content p {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 200;
+  font-size: 1rem;
+  padding-top: 1rem;
+}
+
+.content a {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 500;
+  font-size: 0.9rem;
+  padding-top: 1rem;
+}
+
+.flowchart {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+/*Rates*/
+
+.results {
+  background-color: #f3f3f3;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+  padding-bottom: 2rem;
+  padding-top: 2rem;
+}
+.buy {
+  color: #008080;
+  padding-bottom: 0.5rem;
+}
+
+.sell {
+  padding-top: 0.5rem;
+  color: #cb4335;
+}
+.results h1 {
+  font-size: 3rem;
+}
+
+.buy small {
+  font-size: 0.5rem;
+}
+
+.sell small {
+  font-size: 0.5rem;
+}
+.pad {
+  padding-left: 2rem;
+  padding-right: 2rem;
+}
+
+/* Table Properties */
+
+.tab {
+  border-bottom: #008080 2px solid;
+  padding-bottom: 1rem;
+}
+
+#table-style {
+  margin-top: 2rem;
+}
+
+#table-style th {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+#table-style td {
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 0.8rem;
+}
+
+#table-style i {
+  size: 0.8rem;
+}
+
+#table-style tbody tr td:nth-child(odd) {
+  text-align: left;
+  color: #cb4335;
+}
+
+#table-style tbody tr td:nth-child(even) {
+  text-align: left;
+  color: #008080;
+}
+
+#table-style thead tr th {
+  border-top: 0.5px solid #999;
+  border-bottom: 0.5px solid #999;
+}
+
+#card-override .card-header {
+  background-color: #ffffff;
+  border: none;
+}
+
+#card-override h6 {
+  color: #008080;
+  font-family: "Helvetica Neue";
+  font-style: normal;
+  font-weight: 400;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
+#card-override button {
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.card {
+  border: none;
+}
+.card-header {
+  padding-bottom: 0;
+  padding-left: 0;
+  padding-top: 0;
+  padding-right: 0;
+}
+
+.card-body {
+  padding-top: 0;
+}
+
+.card-body p {
+  padding-top: 0;
+  margin-bottom: 0;
+}
+
+.btn {
+  padding: 0, 0;
+  margin: 0, 0;
+}
+
+#card-override hr {
+  margin-top: 0;
+}
+
+/* Code block */
+
+code {
+  border-radius: 3px;
+}
+
+.code {
+  font-family: "Roboto";
+  font-size: 0.8rem;
+  padding-left: 1rem;
+  padding-top: 1rem;
+  padding-right: 1rem;
+  padding-bottom: 1rem;
+  color: grey;
+}
+
+/*Media Queries*/
+
+@media (max-width: 960px) {
+  #jumbotron-overrides h1 {
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 4rem;
+    color: #ffffff;
+  }
+  .results h1 {
+    font-size: 2rem;
+  }
+  .flowchart {
+    width: 80%;
+  }
+}
+
+@media (max-width: 700px) {
+  .jumbotron {
+    height: 45vh;
+  }
+
+  #jumbotron-overrides h1 {
+    font-weight: 200;
+    font-size: 4rem;
+    color: #ffffff;
+  }
+
+  #jumbotron-overrides h6 {
+    color: #17a589;
+    font-family: "Helvetica Neue";
+    font-style: normal;
+    font-weight: 200;
+    font-size: 1rem;
+    padding-top: 1rem;
+  }
+
+  #jumbotron-overrides .showcase {
+    margin-top: 0.5rem;
+  }
+
+  .hide-sm {
+    display: none;
+  }
+  .results h1 {
+    font-size: 1.5rem;
+  }
+  .flowchart {
+    width: 100%;
+  }
+  .code {
+    max-width: 100%;
+  }
+}
